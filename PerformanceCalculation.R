@@ -1,12 +1,9 @@
 # load the dataset(s)
-setwd("/Users/guoxinqieve/Library/CloudStorage/OneDrive-UCSanDiego/Dissertation/descriptive_survey_data_nnpp/PrivateSpeech_PerformanceCalculation")
+setwd("~PrivateSpeech_PerformanceCalculation")
 library(tidyverse)
 library(readr)
 library(stringr)
 
-
-test_raw = read_csv("Isabella Ramos 1.csv", col_names = FALSE)
-glimpse(test_raw)
 
 performance_calculation = function(x){
   DF = read_csv(x, col_names = FALSE)
@@ -39,11 +36,11 @@ performance = nrow(table_clean) + sum(participant_performance$count_category[par
 return(performance)
 }
 
-L = list.files("/Users/guoxinqieve/Library/CloudStorage/OneDrive-UCSanDiego/Dissertation/descriptive_survey_data_nnpp/PrivateSpeech_PerformanceCalculation", ".csv")
+L = list.files("~PrivateSpeech_PerformanceCalculation", ".csv")
 
 performance_calcuated = lapply(L, performance_calculation)
 
 merged_performance_calcuated =  do.call(rbind, performance_calcuated)
 merged_df = cbind(as.data.frame(L) ,merged_performance_calcuated)
 
-write.csv(merged_df,"/Users/guoxinqieve/Library/CloudStorage/OneDrive-UCSanDiego/Dissertation/descriptive_survey_data_nnpp/PrivateSpeech_PerformanceCalculation/merged_performance_calcuated.csv", row.names = FALSE)
+write.csv(merged_df,"~/merged_performance_calcuated.csv", row.names = FALSE)
